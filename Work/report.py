@@ -22,7 +22,6 @@ def read_prices(filename):
 
     with open(filename, 'rt') as f:
         rows = csv.reader(f)
-        header = next(rows)
         for row in rows:
             try:
                 name, price = row[0], float(row[1])
@@ -44,6 +43,17 @@ def gain_or_loss():
 
     gain = total_cost < total_current
     return total_current, gain
+
+def make_report(portfolio, prices):
+    report = []
+    for s in portfolio:
+        holding = (s['name'], s['shares'], prices[s['name']], round(prices[s['name']] - s['price'], 2))
+        report.append(holding)
+    return report
+
+def print_report(report):
+    for name, shares, price, change in report:
+        print(f'{name:>10s} {shares:>10d} {price:>10.2f} {change:>10.2f}')
 
 
 filename = 'Data/portfolio.csv'
