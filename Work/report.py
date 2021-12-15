@@ -52,6 +52,11 @@ def make_report(portfolio, prices):
     return report
 
 def print_report(report):
+    header = ('Name', 'Shares', 'Price', 'Change')
+    print(f'{header[0]:>10s} {header[1]:>10s} {header[2]:>10s} {header[3]:>10s}')
+
+    dashes = '-'*10
+    print(f'{dashes:>10s} {dashes:>10s} {dashes:>10s} {dashes:>10s}')
     for name, shares, price, change in report:
         print(f'{name:>10s} {shares:>10d} {price:>10.2f} {change:>10.2f}')
 
