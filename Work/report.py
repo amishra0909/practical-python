@@ -58,7 +58,8 @@ def print_report(report):
     dashes = '-'*10
     print(f'{dashes:>10s} {dashes:>10s} {dashes:>10s} {dashes:>10s}')
     for name, shares, price, change in report:
-        print(f'{name:>10s} {shares:>10d} {price:>10.2f} {change:>10.2f}')
+        price = '$' + str(price)
+        print(f'{name:>10s} {shares:>10d} {price:>10s} {change:>10.2f}')
 
 
 filename = 'Data/portfolio.csv'
