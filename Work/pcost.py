@@ -32,9 +32,9 @@ def portfolio_cost(filename):
     return total
 
 
-filepath = 'Data/portfolio.csv'
-if len(sys.argv) == 2:
-    filepath = sys.argv[1]
+def main(argv):
+    print('Total cost:', portfolio_cost(argv[1]))
 
-cost = portfolio_cost(filepath)
-print('Total cost:', cost)
+
+if __name__ == '__main__':
+    main(sys.argv)

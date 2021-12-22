@@ -3,7 +3,6 @@
 # Exercise 2.4
 
 from fileparse import parse_csv
-import csv
 import sys
 
 
@@ -97,7 +96,9 @@ def portfolio_report(portfolio_filename, prices_filename):
     print_report(make_report(read_portfolio(portfolio_filename), read_prices(prices_filename)))
 
 
-filepath = 'Data/portfolio.csv'
-if len(sys.argv) == 2:
-    filepath = sys.argv[1]
-# print(read_portfolio(filename))
+def main(argv):
+    portfolio_report(argv[1], argv[2])
+
+
+if __name__ == '__main__':
+    main(sys.argv)
