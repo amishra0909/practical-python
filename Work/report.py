@@ -2,6 +2,7 @@
 #
 # Exercise 2.4
 
+from fileparse import parse_csv
 import csv
 import sys
 
@@ -11,18 +12,19 @@ def read_portfolio(filename):
     Read a stock portfolio file into a list of dictionaries with keys
     name, shares and price.
     """
-    portfolio = []
 
-    with open(filename, 'rt') as f:
-        rows = csv.reader(f)
-        header = next(rows)
-        for row in rows:
-            holding = {
-                'name': row[0],
-                'shares': int(row[1]),
-                'price': float(row[2])
-            }
-            portfolio.append(holding)
+    portfolio = parse_csv(filename, select=['name', 'shares', 'price'], has_headers=True, types=[str, int, float])
+    #
+    # with open(filename, 'rt') as f:
+    #     rows = csv.reader(f)
+    #     header = next(rows)
+    #     for row in rows:
+    #         holding = {
+    #             'name': row[0],
+    #             'shares': int(row[1]),
+    #             'price': float(row[2])
+    #         }
+    #         portfolio.append(holding)
 
     return portfolio
 
@@ -32,16 +34,17 @@ def read_prices(filename):
     Read a stock price file into a dictionary with keys as stock symbols
     and values as prices of the stocks.
     """
-    prices = {}
+    prices = dict(parse_csv(filename, has_headers=False, types=[str, float]))
 
-    with open(filename, 'rt') as f:
-        rows = csv.reader(f)
-        for row in rows:
-            try:
-                name, price = row[0], float(row[1])
-                prices[name] = price
-            except:
-                print('Invalid row :', row)
+    # with open(filename, 'rt') as f:
+    #     rows = csv.reader(f)
+    #     for row in rows:
+    #         try:
+    #             name, price = row[0], float(row[1])
+    #             prices[name] = price
+    #         except:
+    #             print('Invalid row :', row)
+
     return prices
 
 
@@ -94,7 +97,7 @@ def portfolio_report(portfolio_filename, prices_filename):
     print_report(make_report(read_portfolio(portfolio_filename), read_prices(prices_filename)))
 
 
-filename = 'Data/portfolio.csv'
+filepath = 'Data/portfolio.csv'
 if len(sys.argv) == 2:
-    filename = sys.argv[1]
-print(read_portfolio(filename))
+    filepath = sys.argv[1]
+# print(read_portfolio(filename))
