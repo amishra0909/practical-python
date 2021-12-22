@@ -39,7 +39,7 @@ def parse_csv(filename, select=None, types=[str, int, float], has_headers=True, 
                     row = [func(val) for func, val in zip(types, row)]
                 except Exception as e:
                     if not silence_error:
-                        print(f'Row {row_number:>2}: Couldn\'t convert {row}')
+                        print(f'Row {row_number:>2}: Could not convert {row}')
                         print(f'Row {row_number:>2}: Reason {e}')
 
             if has_headers:
