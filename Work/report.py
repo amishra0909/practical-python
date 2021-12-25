@@ -12,20 +12,6 @@ def read_portfolio(filename):
     Read a stock portfolio file into a list of dictionaries with keys
     name, shares and price.
     """
-
-    # portfolio = parse_csv(filename, select=['name', 'shares', 'price'], has_headers=True, types=[str, int, float])
-    #
-    # with open(filename, 'rt') as f:
-    #     rows = csv.reader(f)
-    #     header = next(rows)
-    #     for row in rows:
-    #         holding = {
-    #             'name': row[0],
-    #             'shares': int(row[1]),
-    #             'price': float(row[2])
-    #         }
-    #         portfolio.append(holding)
-
     portfolio_dicts = parse_csv('Data/portfolio.csv',
                                 select=['name', 'shares', 'price'],
                                 types=[str, int, float],
@@ -40,16 +26,6 @@ def read_prices(filename):
     and values as prices of the stocks.
     """
     prices = dict(parse_csv(filename, has_headers=False, types=[str, float]))
-
-    # with open(filename, 'rt') as f:
-    #     rows = csv.reader(f)
-    #     for row in rows:
-    #         try:
-    #             name, price = row[0], float(row[1])
-    #             prices[name] = price
-    #         except:
-    #             print('Invalid row :', row)
-
     return prices
 
 
