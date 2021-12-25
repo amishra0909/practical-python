@@ -72,13 +72,16 @@ def print_report(report, formatter):
         formatter.row(rowdata)
 
 
-def portfolio_report(portfolio_filename, prices_filename):
-    formatter = tableformatter.HTMLTableFormatter()
+def portfolio_report(portfolio_filename, prices_filename, fmt='txt'):
+    formatter = tableformatter.create_formatter(fmt)
     print_report(make_report(read_portfolio(portfolio_filename), read_prices(prices_filename)), formatter)
 
 
 def main(argv):
-    portfolio_report(argv[1], argv[2])
+    if len(argv) == 4:
+        portfolio_report(argv[1], argv[2], argv[3])
+    else:
+        portfolio_report(argv[1], argv[2])
 
 
 if __name__ == '__main__':

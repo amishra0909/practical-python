@@ -60,3 +60,22 @@ class HTMLTableFormatter(TableFormatter):
     def row(self, row):
         row_values = ''.join(['<td>' + row_data + '</td>' for row_data in row])
         print('<tr>' + row_values + '</tr>')
+
+
+def create_formatter(name):
+    """
+    Helper function to create table formatter object using
+    the type of format as input.
+    Currently, we supported following formats:
+        txt (for Plain Text),
+        csv (for CSV)
+        html (for HTML)
+    """
+    if name == 'txt':
+        return TextTableFormatter()
+    elif name == 'csv':
+        return CSVTableFormatter()
+    elif name == 'html':
+        return HTMLTableFormatter()
+    else:
+        raise RuntimeError('Unknown format {name}')
