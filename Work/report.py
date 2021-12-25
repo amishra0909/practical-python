@@ -3,6 +3,7 @@
 # Exercise 2.4
 
 from fileparse import parse_csv
+import stock
 import sys
 
 
@@ -12,7 +13,7 @@ def read_portfolio(filename):
     name, shares and price.
     """
 
-    portfolio = parse_csv(filename, select=['name', 'shares', 'price'], has_headers=True, types=[str, int, float])
+    # portfolio = parse_csv(filename, select=['name', 'shares', 'price'], has_headers=True, types=[str, int, float])
     #
     # with open(filename, 'rt') as f:
     #     rows = csv.reader(f)
@@ -25,6 +26,11 @@ def read_portfolio(filename):
     #         }
     #         portfolio.append(holding)
 
+    portfolio_dicts = parse_csv('Data/portfolio.csv',
+                                select=['name', 'shares', 'price'],
+                                types=[str, int, float],
+                                has_headers=True)
+    portfolio = [stock.Stock(d['name'], d['shares'], d['price']) for d in portfolio_dicts]
     return portfolio
 
 
@@ -59,8 +65,8 @@ def gain_or_loss():
     total_current = 0.0
 
     for s in portfolio:
-        total_cost += s['shares'] * s['price']
-        total_current += s['shares'] * prices[s['name']]
+        total_cost += s.shares * s.price
+        total_current += s.shares * prices[s.name]
 
     gain = total_cost < total_current
     return total_current, gain
@@ -73,7 +79,7 @@ def make_report(portfolio, prices):
     """
     report = []
     for s in portfolio:
-        holding = (s['name'], s['shares'], prices[s['name']], round(prices[s['name']] - s['price'], 2))
+        holding = (s.name, s.shares, prices[s.name], round(prices[s.name] - s.price, 2))
         report.append(holding)
     return report
 

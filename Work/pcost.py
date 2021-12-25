@@ -16,7 +16,7 @@ def portfolio_cost(filename):
     portfolio = read_portfolio(filename)
     for i, row in enumerate(portfolio, start=1):
         try:
-            total += row['shares'] * row['price']
+            total += row.shares * row.price
         except Exception:
             print(f'Row {i:>2}: Could not convert: {row}')
     # with open(filename, 'rt') as f:
