@@ -73,7 +73,7 @@ def print_report(report, formatter):
 
 
 def portfolio_report(portfolio_filename, prices_filename):
-    formatter = tableformatter.TableFormatter()
+    formatter = tableformatter.HTMLTableFormatter()
     print_report(make_report(read_portfolio(portfolio_filename), read_prices(prices_filename)), formatter)
 
 
