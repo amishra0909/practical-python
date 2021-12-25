@@ -3,6 +3,7 @@
 # Exercise 2.4
 
 from fileparse import parse_csv
+import tableformatter
 import stock
 import sys
 
@@ -60,22 +61,20 @@ def make_report(portfolio, prices):
     return report
 
 
-def print_report(report):
+def print_report(report, formatter):
     """
     Print the report calculated from make_report() function.
     """
-    header = ('Name', 'Shares', 'Price', 'Change')
-    print(f'{header[0]:>10s} {header[1]:>10s} {header[2]:>10s} {header[3]:>10s}')
+    formatter.headings(['Name', 'Shares', 'Price', 'Change']);
 
-    dashes = '-' * 10
-    print(f'{dashes:>10s} {dashes:>10s} {dashes:>10s} {dashes:>10s}')
     for name, shares, price, change in report:
-        price = '$' + str(price)
-        print(f'{name:>10s} {shares:>10d} {price:>10s} {change:>10.2f}')
+        rowdata = [name, str(shares), '$' + str(price), str(change)]
+        formatter.row(rowdata)
 
 
 def portfolio_report(portfolio_filename, prices_filename):
-    print_report(make_report(read_portfolio(portfolio_filename), read_prices(prices_filename)))
+    formatter = tableformatter.TableFormatter()
+    print_report(make_report(read_portfolio(portfolio_filename), read_prices(prices_filename)), formatter)
 
 
 def main(argv):
