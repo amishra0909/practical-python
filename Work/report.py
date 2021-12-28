@@ -18,7 +18,7 @@ def read_portfolio(filename):
                                 select=['name', 'shares', 'price'],
                                 types=[str, int, float],
                                 has_headers=True)
-    portfolio = [stock.Stock(d['name'], d['shares'], d['price']) for d in portfolio_dicts]
+    portfolio = [stock.Stock(**d) for d in portfolio_dicts]
     return Portfolio(portfolio)
 
 
