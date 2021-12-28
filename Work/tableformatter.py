@@ -2,6 +2,7 @@
 
 from formaterror import FormatError
 
+
 class TableFormatter:
     """
     A class to define methods for formatting a report in tabular format.
