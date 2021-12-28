@@ -91,5 +91,5 @@ def print_table(table, columns, formatter):
     formatter.headings(columns)
 
     for row in table:
-        rowdata = [str(getattr(row, column)) for column in columns]
-        formatter.row(rowdata)
+        row_data = [str(getattr(row, column)) for column in columns]
+        formatter.row(row_data)
