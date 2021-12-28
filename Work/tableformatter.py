@@ -79,3 +79,15 @@ def create_formatter(name):
         return HTMLTableFormatter()
     else:
         raise RuntimeError('Unknown format {name}')
+
+
+def print_table(table, columns, formatter):
+    """
+    Helper function to print selected columns from a table in the format
+    specified via the formatter object.
+    """
+    formatter.headings(columns)
+
+    for row in table:
+        rowdata = [str(getattr(row, column)) for column in columns]
+        formatter.row(rowdata)
