@@ -31,7 +31,7 @@ class Stock:
     @shares.setter
     def shares(self, value):
         if not isinstance(value, int):
-            raise TypeError("Expected an int")
+            raise TypeError(f"Expected an int but found {type(value)} and value = {value}")
         self._shares = value
 
     @property

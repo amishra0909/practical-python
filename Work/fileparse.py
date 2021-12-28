@@ -39,6 +39,7 @@ def parse_internal(enumerator, select=None, types=[str, int, float], has_headers
                 if not silence_error:
                     print(f'Row {row_number:>2}: Could not convert {row}')
                     print(f'Row {row_number:>2}: Reason {e}')
+                continue
 
         if has_headers:
             record = dict(zip(headers, row))
