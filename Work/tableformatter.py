@@ -1,5 +1,7 @@
 # tableformatter.py
 
+from formaterror import FormatError
+
 class TableFormatter:
     """
     A class to define methods for formatting a report in tabular format.
@@ -78,7 +80,7 @@ def create_formatter(name):
     elif name == 'html':
         return HTMLTableFormatter()
     else:
-        raise RuntimeError('Unknown format {name}')
+        raise FormatError(f'Unknown table format {name}')
 
 
 def print_table(table, columns, formatter):
