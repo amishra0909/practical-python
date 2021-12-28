@@ -30,9 +30,10 @@ def parse_stock_data(lines):
 
 
 def filter_symbols(rows, names):
-    for row in rows:
-        if row['name'] in names:
-            yield row
+    # for row in rows:
+    #    if row['name'] in names:
+    #        yield row
+    return (row for row in rows if row['name'] in names)
 
 
 def ticker(portfolio_filename, stocklog_filename, format):
