@@ -2,6 +2,7 @@
 #
 # Exercise 4.1
 
+from typed_property import String, Integer, Float
 
 class Stock:
     """
@@ -13,26 +14,17 @@ class Stock:
     from other objects that have been created.
     """
 
-    __slots__ = ('name', '_shares', 'price')
+    name = String('name')
+    shares = Integer('shares')
+    price = Float('price')
 
     def __init__(self, name, shares, price):
-        self._shares = None
         self.name = name
         self.shares = shares
         self.price = price
 
     def __repr__(self):
         return f"Stock('{self.name}', {self.shares}, {self.price})"
-
-    @property
-    def shares(self):
-        return self._shares
-
-    @shares.setter
-    def shares(self, value):
-        if not isinstance(value, int):
-            raise TypeError(f"Expected an int but found {type(value)} and value = {value}")
-        self._shares = value
 
     @property
     def cost(self):
