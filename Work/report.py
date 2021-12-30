@@ -4,6 +4,7 @@
 
 from fileparse import parse_csv
 from portfolio import Portfolio
+import logging
 import tableformatter
 import sys
 
@@ -79,5 +80,17 @@ def main(argv):
         portfolio_report(argv[1], argv[2])
 
 
+def setup_logging():
+    logging.basicConfig(
+        filename='app.log',
+        filemode='w',
+        level=logging.DEBUG
+    )
+
+
+setup_logging()
+
+
 if __name__ == '__main__':
+    setup_logging()
     main(sys.argv)
