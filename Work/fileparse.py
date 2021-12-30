@@ -3,6 +3,8 @@
 # Exercise 3.3
 
 import csv
+import logging
+log = logging.getLogger(__name__)
 
 
 def parse_internal(enumerator, select=None, types=[str, int, float], has_headers=True, delimiter=',', silence_error=False):
@@ -37,8 +39,8 @@ def parse_internal(enumerator, select=None, types=[str, int, float], has_headers
                 row = [func(val) for func, val in zip(types, row)]
             except Exception as e:
                 if not silence_error:
-                    print(f'Row {row_number:>2}: Could not convert {row}')
-                    print(f'Row {row_number:>2}: Reason {e}')
+                    log.warning(f'Row {row_number:>2}: Could not convert {row}')
+                    log.debug(f'Row {row_number:>2}: Reason {e}')
                 continue
 
         if has_headers:
